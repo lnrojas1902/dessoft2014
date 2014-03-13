@@ -1,0 +1,9 @@
+{
+    "displayName" : "Pyme",
+    "name" : "pyme",
+    "templateName" : "pyme",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/pyme.service.subsystem.web/webresources/Pyme",
+    "el" : "#main"
+}

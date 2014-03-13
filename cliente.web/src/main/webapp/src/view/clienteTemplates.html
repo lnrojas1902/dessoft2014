@@ -1,0 +1,66 @@
+<script type="text/template" id="clienteList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>name</th>
+		 <th>docIdentidad</th>
+		 <th>tipo</th>
+		 <th>password</th>
+		 <th>login</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(clientes, function(cliente) { %>
+    <tr>
+		<td><%= htmlEncode(cliente.getDisplay('name')) %></td>
+		<td><%= htmlEncode(cliente.getDisplay('docIdentidad')) %></td>
+		<td><%= htmlEncode(cliente.getDisplay('tipo')) %></td>
+		<td><%= htmlEncode(cliente.getDisplay('password')) %></td>
+		<td><%= htmlEncode(cliente.getDisplay('login')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-cliente-edit',{id:<%= cliente.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-cliente-delete',{id:<%= cliente.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="cliente">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-clienteForm">
+    <% if(cliente.id) {%>
+    <input type="hidden" name="id" value="<%= cliente.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= cliente.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="docIdentidad">docIdentidad</label>
+    	<input type="text" class="form-control" id="docIdentidad" name="docIdentidad" placeholder="Enter value" value="<%= cliente.get('docIdentidad') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tipo">tipo</label>
+    	<input type="text" class="form-control" id="tipo" name="tipo" placeholder="Enter value" value="<%= cliente.get('tipo') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="password">password</label>
+    	<input type="text" class="form-control" id="password" name="password" placeholder="Enter value" value="<%= cliente.get('password') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="login">login</label>
+    	<input type="text" class="form-control" id="login" name="login" placeholder="Enter value" value="<%= cliente.get('login') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

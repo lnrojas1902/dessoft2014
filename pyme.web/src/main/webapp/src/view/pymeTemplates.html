@@ -1,0 +1,66 @@
+<script type="text/template" id="pymeList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>name</th>
+		 <th>descripcion</th>
+		 <th>idCatalogo</th>
+		 <th>clienteId</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(pymes, function(pyme) { %>
+    <tr>
+		<td><%= htmlEncode(pyme.getDisplay('name')) %></td>
+		<td><%= htmlEncode(pyme.getDisplay('descripcion')) %></td>
+		<td><%= htmlEncode(pyme.getDisplay('idCatalogo')) %></td>
+		<td><%= htmlEncode(pyme.getDisplay('clienteId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-pyme-edit',{id:<%= pyme.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-pyme-delete',{id:<%= pyme.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="pyme">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-pymeForm">
+    <% if(pyme.id) {%>
+    <input type="hidden" name="id" value="<%= pyme.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= pyme.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="descripcion">descripcion</label>
+    	<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Enter value" value="<%= pyme.get('descripcion') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="idCatalogo">idCatalogo</label>
+    	<input type="text" class="form-control" id="idCatalogo" name="idCatalogo" placeholder="Enter value" value="<%= pyme.get('idCatalogo') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="clienteidId">clienteId</label> 
+            <select class="form-control" id="clienteId" name="clienteId">
+			  <option value="">None</option>
+            <% cliente.each(function(clienteid) { %> 
+              <option value="<%=clienteid.get('id')%>" <% if(pyme.get('clienteId')==clienteid.get('id')) {%>selected<%}%> ><%=clienteid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

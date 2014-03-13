@@ -1,0 +1,9 @@
+{
+    "displayName" : "CarritoDeCompras",
+    "name" : "carritodecompras",
+    "templateName" : "carritodecompras",
+    "url" : "carritodecompras.html",
+    "server": "localhost:8080",
+    "context": "/carritodecompras.master.service.subsystem/webresources/CarritoDeComprasMaster",
+    "el" : "#main"
+}

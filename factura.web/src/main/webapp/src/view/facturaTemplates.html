@@ -1,0 +1,86 @@
+<script type="text/template" id="facturaList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>name</th>
+		 <th>valor</th>
+		 <th>tipo</th>
+		 <th>tipoDePago</th>
+		 <th>fechaDeRealizacion</th>
+		 <th>fechaEsperadaDeEntrega</th>
+		 <th>direccionEntrega</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(facturas, function(factura) { %>
+    <tr>
+		<td><%= htmlEncode(factura.getDisplay('name')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('valor')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('tipo')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('tipoDePago')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('fechaDeRealizacion')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('fechaEsperadaDeEntrega')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('direccionEntrega')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-factura-edit',{id:<%= factura.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-factura-delete',{id:<%= factura.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="factura">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-facturaForm">
+    <% if(factura.id) {%>
+    <input type="hidden" name="id" value="<%= factura.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= factura.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="valor">valor</label>
+    	<input type="text" class="form-control" id="valor" name="valor" placeholder="Enter value" value="<%= factura.get('valor') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tipo">tipo</label>
+    	<input type="text" class="form-control" id="tipo" name="tipo" placeholder="Enter value" value="<%= factura.get('tipo') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tipoDePago">tipoDePago</label>
+    	<input type="text" class="form-control" id="tipoDePago" name="tipoDePago" placeholder="Enter value" value="<%= factura.get('tipoDePago') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fechaDeRealizacion">fechaDeRealizacion</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fechaDeRealizacion"  name="fechaDeRealizacion" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fechaDeRealizacion').datepicker({autoclose:true});
+        	$('#fechaDeRealizacion').datepicker('setDate',new Date(<%= factura.get('fechaDeRealizacion') %>));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+			<label for="fechaEsperadaDeEntrega">fechaEsperadaDeEntrega</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fechaEsperadaDeEntrega"  name="fechaEsperadaDeEntrega" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fechaEsperadaDeEntrega').datepicker({autoclose:true});
+        	$('#fechaEsperadaDeEntrega').datepicker('setDate',new Date(<%= factura.get('fechaEsperadaDeEntrega') %>));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+		<label for="direccionEntrega">direccionEntrega</label>
+    	<input type="text" class="form-control" id="direccionEntrega" name="direccionEntrega" placeholder="Enter value" value="<%= factura.get('direccionEntrega') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

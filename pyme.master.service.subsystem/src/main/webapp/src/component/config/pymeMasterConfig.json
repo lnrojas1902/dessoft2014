@@ -1,0 +1,9 @@
+{
+    "displayName" : "Pyme",
+    "name" : "pyme",
+    "templateName" : "pyme",
+    "url" : "pyme.html",
+    "server": "localhost:8080",
+    "context": "/pyme.master.service.subsystem/webresources/PymeMaster",
+    "el" : "#main"
+}

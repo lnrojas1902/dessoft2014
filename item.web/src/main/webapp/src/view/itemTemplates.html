@@ -1,0 +1,66 @@
+<script type="text/template" id="itemList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>idProducto</th>
+		 <th>name</th>
+		 <th>cantidad</th>
+		 <th>estado</th>
+		 <th>descuento</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(items, function(item) { %>
+    <tr>
+		<td><%= htmlEncode(item.getDisplay('idProducto')) %></td>
+		<td><%= htmlEncode(item.getDisplay('name')) %></td>
+		<td><%= htmlEncode(item.getDisplay('cantidad')) %></td>
+		<td><%= htmlEncode(item.getDisplay('estado')) %></td>
+		<td><%= htmlEncode(item.getDisplay('descuento')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-item-edit',{id:<%= item.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-item-delete',{id:<%= item.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="item">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-itemForm">
+    <% if(item.id) {%>
+    <input type="hidden" name="id" value="<%= item.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="idProducto">idProducto</label>
+    	<input type="text" class="form-control" id="idProducto" name="idProducto" placeholder="Enter value" value="<%= item.get('idProducto') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="name">name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= item.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="cantidad">cantidad</label>
+    	<input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Enter value" value="<%= item.get('cantidad') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="estado">estado</label>
+    	<input type="text" class="form-control" id="estado" name="estado" placeholder="Enter value" value="<%= item.get('estado') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="descuento">descuento</label>
+    	<input type="text" class="form-control" id="descuento" name="descuento" placeholder="Enter value" value="<%= item.get('descuento') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

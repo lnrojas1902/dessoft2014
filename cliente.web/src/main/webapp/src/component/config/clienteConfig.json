@@ -1,0 +1,9 @@
+{
+    "displayName" : "Cliente",
+    "name" : "cliente",
+    "templateName" : "cliente",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/cliente.service.subsystem.web/webresources/Cliente",
+    "el" : "#main"
+}
